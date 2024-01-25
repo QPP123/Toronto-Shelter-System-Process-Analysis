@@ -1,4 +1,5 @@
 # Toronto-Shelter-System-Process-Analysis
+No LLMs were used in this analysis and project.
 
 ## Overview
 
