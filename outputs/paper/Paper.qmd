@@ -1,0 +1,198 @@
+---
+title: "Analysis About Toronto Shelter System Flow"
+author: 
+  - Kuiyao Qiao
+thanks: "Code and data are available at: https://github.com/QPP123/Toronto-Shelter-System-Process-Analysis"
+date: today
+date-format: long
+abstract: "How to respond to homelessness in cities is a challenge many cities face now. The shelter system is essential to Toronto's efforts to address this issue. The data used in the paper comes from open.toronto.ca and includes detailed records for the population. This paper aims to analyze this dataset to shed light on the current state of homelessness in Toronto, focusing on the characteristics and trends observed within the shelter system."
+format: html
+number-sections: true
+bibliography: ref.bib 
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(ggplot2)
+
+toronto_shelter_system_flow<-read.csv("toronto-shelter-system-flow.csv")
+
+
+```
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+
+toronto_shelter_system_flow_dec_23<-toronto_shelter_system_flow%>%
+  filter(date.mmm.yy.=='Dec-23')
+
+
+
+toronto_shelter_system_flow_dec_23_type<-toronto_shelter_system_flow_dec_23[,c(2:9)]
+
+toronto_shelter_system_flow_dec_23_age<-toronto_shelter_system_flow_dec_23[,c(2:3,10:14)]
+
+
+toronto_shelter_system_flow_dec_23_gender<-toronto_shelter_system_flow_dec_23[,c(2:3,15:17)]
+
+
+toronto_shelter_system_flow_dec_23_population_group_percentage<-toronto_shelter_system_flow_dec_23[,c(2:3,18)]
+
+
+```
+
+```{r}
+#| include: false
+
+knitr::kable(toronto_shelter_system_flow_dec_23_type)
+```
+
+```{r}
+#| include: false
+
+knitr::kable(toronto_shelter_system_flow_dec_23_age)
+```
+
+```{r}
+#| include: false
+
+knitr::kable(toronto_shelter_system_flow_dec_23_gender)
+```
+
+```{r}
+#| include: false
+
+knitr::kable(toronto_shelter_system_flow_dec_23_population_group_percentage)
+```
+
+# Introduction
+
+Toronto's shelter system plays an integral role in addressing homelessness in the city by providing shelter and supportive services to individuals and families without permanent housing. Operating 24/7, these facilities offer shelter and essential ancillary services such as meals, laundry, health support, counselling and help with housing plans, providing vital assistance to residents in their transition to a stable living environment. In response to growing demand, Toronto has expanded its shelter capacity by adding new space and 24-hour temporary locations and adapting safety operations to COVID-19 protocols. Shelter system flow data is a critical component of the city's open data portal, updated monthly with the number of people entering and exiting the shelter system, including specific subpopulations such as families and refugees. This data-driven approach ensures that services are constantly evolving to meet the changing needs of Toronto's homeless population. The importance of Toronto's shelter system goes beyond providing shelter; it is also a key element in the City of Toronto's broader strategy to combat homelessness. The impact of homelessness on society is far-reaching, not only economically but also socially and health-wise. Homelessness can lead to increased healthcare costs, strain public services and create social inequalities. Lack of stable housing often exacerbates mental and physical health problems, hinders access to education and employment opportunities, and can lead to a cycle of poverty. By proactively addressing homelessness, the Toronto shelter system not only helps those in dire need but also promotes the overall well-being and cohesion of the city, making a tangible difference in the lives of residents and the community at large[@City-Operated-Services].
+
+# Data {#sec-data}
+
+```{r}
+#| echo: false
+#| fig-cap: Number of persons who entering shelters with different status[@Open-Data-Dataset] 
+
+toronto_shelter_system_flow_dec_23_type_1<-toronto_shelter_system_flow_dec_23_type[,c(2:8)] %>%
+  pivot_longer(!population_group, names_to = "type", values_to = "count")
+
+
+toronto_shelter_system_flow_dec_23_type_1%>%
+  filter(population_group=='All Population')%>%
+  ggplot(aes(x=reorder(type,count),y=count,fill=type))+
+  geom_bar(stat = 'identity',width=0.66)+
+  labs(title = "Type", x="type")+
+  coord_flip()+
+  theme_bw()+
+  theme(legend.position='none')+
+  scale_y_continuous(expand=expansion(c(0,0.05)))+
+  scale_fill_brewer(palette='Set3')
+
+```
+
+The horizontal bar graph entitled "Figure 1: Number of Persons Entering Shelter in Different Capacities" visually summarizes the identities of persons who interacted with the shelter system during the reporting period. "Active Homeless," shown in red, is the most significant category, representing the vast majority of people who have used the shelter system at least once in the past three months but have not transitioned to permanent housing. The number of people in this status is very high. In contrast, the 'Newly Confirmed Status' and 'Moved into Housing' categories (shown in teal and green, respectively) represent new entrants to the shelter system and those who have moved into permanent housing, indicating entry and successful exit but the number of new entrants to the system is greater than the number of people who have moved into permanent housing. The 'Becoming inactive' category (shown in yellow) represents people who have not used shelter services in the last three months, indicating that they may be in active transition or lax service use. The 'Returned to Shelter' and 'Returned from Shelter' categories (purple and pink) are the minor groupings and represent those who have re-entered the shelter system, which may reflect the challenges some people face in maintaining stable housing or the cyclical nature of homelessness. The bars effectively reflect the dynamic nature of the shelter system, highlighting the fluidity of homelessness and the different outcomes of shelter interactions.
+
+```{r}
+#| echo: false
+#| fig-cap: Number of people of different ages in the shelter[@Open-Data-Dataset]
+
+toronto_shelter_system_flow_dec_23_age_1<-toronto_shelter_system_flow_dec_23_age[,c(2:7)] %>%
+  pivot_longer(!population_group, names_to = "age", values_to = "count")
+
+
+toronto_shelter_system_flow_dec_23_age_1 %>%
+mutate(age=str_replace(age,'\\.','~')) %>%
+mutate(age=str_replace(age,'^age','')) %>%
+  filter(population_group=='All Population')%>%
+  ggplot(aes(x=reorder(age,count),y=count,fill=age))+
+  geom_bar(stat = 'identity',width=0.66)+
+  labs(title = "Age", x="age")+
+  coord_flip()+
+  theme_bw()+
+  theme(legend.position='none')+
+  scale_y_continuous(expand=expansion(c(0,0.05)))+
+  scale_fill_brewer(palette='Set1')
+
+```
+
+The most extensive olive-coloured bar represents the 25-44 age group, indicating that this is the most prevalent age group in the refuge, suggesting that the core population comprises young and middle-aged people. The next largest age group is the 45-64 age group, represented by the teal bar, followed by the 16-24 age group, represented by the coral colour. This indicates that these shelters also serve many young adults and those nearing retirement age. Youth under 16 (purple) and seniors over 65 (light blue) are the most miniature bars on the chart, indicating that these age groups make up a smaller proportion of the shelter population.
+
+Analysis of the chart shows that while the shelter system serves a wide range of age groups, it is predominantly used by adults in their prime working years, which may indicate that economic factors play a significant role in homelessness. The number of youth and seniors, while smaller, highlights the need for the shelter system to provide age-specific services to meet the unique needs of these vulnerable populations.
+
+```{r}
+#| echo: false
+#| fig-cap: Number of people of different genders in the shelter[@Open-Data-Dataset]
+
+toronto_shelter_system_flow_dec_23_gender_1<-toronto_shelter_system_flow_dec_23_gender[,c(2:5)] %>%
+  pivot_longer(!population_group, names_to = "gender", values_to = "count")
+
+
+toronto_shelter_system_flow_dec_23_gender_1 %>%
+mutate(gender=case_when(str_detect(gender,'_male')~'male',
+                        str_detect(gender,'_female')~'female',
+						str_detect(gender,'_transgender')~'transgender',
+						.default='.')) %>%
+  filter(population_group=='All Population')%>%
+  ggplot(aes(x=reorder(gender,count),y=count,fill=gender))+
+  geom_bar(stat = 'identity',width=0.66)+
+  labs(title = "Gender", x="gender")+
+  coord_flip()+
+  theme_bw()+
+  theme(legend.position='none')+
+  scale_y_continuous(expand=expansion(c(0,0.05)))+
+  scale_fill_brewer(palette='Set2')
+```
+
+The green bar representing "gender_male" is the highest, indicating that the most significant percentage of the shelter is male. This is closely followed by the "Gender_Female" category, represented by the red bar, which indicates that there are many females but fewer than males. The smallest group is the "Gender_Trans . Non . Binary_or_Bi-Spiritual", represented by a blue bar chart, indicating fewer non-binary, transgender, or bi-Spiritual people in the shelter.
+
+Analysis of this chart shows that the population using the shelter system is gender diverse, with a significantly higher percentage of males than females and transgender/non-binary/two-spirit people. This data suggests the need for gender-specific resources and support within the shelter system to meet the varying needs of different gender groups. The relatively low numbers of transgender/non-binary/two-spirit individuals may reflect underrepresentation or underreporting within the shelter system, suggesting that more inclusive policies and targeted outreach efforts may be needed to ensure that the shelter system can serve all individuals.
+
+Population_group_percentage
+
+```{r}
+#| echo: false
+#| fig-cap: Number of people of different groups in the shelter[@Open-Data-Dataset]
+
+toronto_shelter_system_flow_dec_23_population_group_percentage$population_group_percentage<-gsub("%","",toronto_shelter_system_flow_dec_23_population_group_percentage$population_group_percentage)
+toronto_shelter_system_flow_dec_23_population_group_percentage$population_group_percentage<-as.numeric(toronto_shelter_system_flow_dec_23_population_group_percentage$population_group_percentage)
+
+
+toronto_shelter_system_flow_dec_23_population_group_percentage%>%
+  filter(population_group!='All Population')%>%
+  ggplot(aes(x=population_group,y=population_group_percentage))+
+  geom_bar(stat = 'identity',fill="steelblue",width=0.66)+
+  theme_bw()
+```
+
+The group labelled 'Single Adults' has the highest percentage, meaning that individuals without families are the most significant demographic component within the shelter. 'Refugees' and 'Chronic' also make up a substantial percentage of the shelter population, suggesting that these groups are in great need of specialized support. Families and Aboriginals are underrepresented compared to single adults but are still notable groups. According to the chart, "youth" makes up the smallest percentage of the shelter population, which may indicate a lower rate of homelessness among youth or the existence of other support systems or services for this age group outside of the traditional shelter system.
+
+# Discussion {#sec-discussion}
+
+Firstly, the table shows that the sheltered housing population is predominantly made up of adults aged 25-44 years, followed by 45-64 year olds, 16-24 year olds, under 16 year olds and over 65 year olds. This suggests that the majority of shelter occupants are likely to be at their most economically active, highlighting the underlying socio-economic factors that lead to homelessness, such as unemployment or underemployment. Males are the next most populous group in shelters, with smaller percentages of females and transgender/non-binary/two-spirit people. This distribution suggests that males may be more likely to be homeless or more likely to seek shelter services. Also, those currently classified as "actively homeless" had the highest number of people living in shelters, while fewer were newly identified as homeless or in transition to housing. This suggests a need for more effective pathways out of homelessness. Finally, single adults are the largest group in shelters, with refugees and chronically homeless also prominent. Families, Aboriginal people and youth are also represented, but to a lesser extent.
+
+Many people in shelters are of working age, suggesting that employment support, job training and education may be critical services. Given the gender statistics, it may be necessary to provide targeted support to meet the specific needs of men while also ensuring that services are inclusive and supportive of the needs of women and transgender/non-binary/two-spirit people. The high proportion of single adults suggests that there may be a need for services targeted at personal skills development, mental health support and substance misuse programmes. The presence of refugees demonstrates the importance of providing language assistance, cultural sensitivity and integration programmes[@Emergency-Shelter-System;@Shelters;@Shelter-Locations].
+
+Next are some recommendations
+
+1.  Partner with local businesses and educational institutions to provide job training and placement programmes specifically for shelter residents.
+
+2.  Provide educational workshops and skills training courses to enhance employability.
+
+3.  Develop targeted programmes for men, including mental health and addiction support, as they are the most numerous population.
+
+4.  Ensure gender-specific healthcare and support services for females and transgender/non-binary/two-spirit persons.
+
+5.  Enhance family support services, including family counselling and childcare, to better assist families in the shelter system. Expand youth-specific programmes to provide mentoring, educational continuity and life skills training.
+
+6.  Provide language courses and cultural orientation programmes to help refugees integrate more effectively into the community—partner with cultural organizations to provide support tailored to the cultural needs of refugees.
+
+7.  Provide more transitional housing to provide a transition between shelter and independent living. Build partnerships with housing providers to increase affordable housing options.
