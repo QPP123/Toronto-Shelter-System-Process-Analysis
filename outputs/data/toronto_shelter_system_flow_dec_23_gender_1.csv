@@ -1,0 +1,25 @@
+"","population_group","gender","count"
+"1","All Population","gender_male",6376
+"2","All Population","gender_female",4096
+"3","All Population","gender_transgender.non.binary_or_two_spirit",135
+"4","Chronic","gender_male",3492
+"5","Chronic","gender_female",2196
+"6","Chronic","gender_transgender.non.binary_or_two_spirit",86
+"7","Refugees","gender_male",3108
+"8","Refugees","gender_female",2378
+"9","Refugees","gender_transgender.non.binary_or_two_spirit",26
+"10","Families","gender_male",1086
+"11","Families","gender_female",1434
+"12","Families","gender_transgender.non.binary_or_two_spirit",2
+"13","Youth","gender_male",623
+"14","Youth","gender_female",411
+"15","Youth","gender_transgender.non.binary_or_two_spirit",45
+"16","Single Adult","gender_male",4667
+"17","Single Adult","gender_female",2251
+"18","Single Adult","gender_transgender.non.binary_or_two_spirit",88
+"19","Non-refugees","gender_male",3268
+"20","Non-refugees","gender_female",1718
+"21","Non-refugees","gender_transgender.non.binary_or_two_spirit",109
+"22","Indigenous","gender_male",414
+"23","Indigenous","gender_female",238
+"24","Indigenous","gender_transgender.non.binary_or_two_spirit",27

@@ -1,0 +1,41 @@
+"","population_group","age","count"
+"1","All Population","ageunder16",1264
+"2","All Population","age16.24",1349
+"3","All Population","age25.44",4873
+"4","All Population","age45.64",2594
+"5","All Population","age65over",527
+"6","Chronic","ageunder16",687
+"7","Chronic","age16.24",631
+"8","Chronic","age25.44",2339
+"9","Chronic","age45.64",1703
+"10","Chronic","age65over",414
+"11","Refugees","ageunder16",867
+"12","Refugees","age16.24",801
+"13","Refugees","age25.44",3059
+"14","Refugees","age45.64",750
+"15","Refugees","age65over",35
+"16","Families","ageunder16",1258
+"17","Families","age16.24",269
+"18","Families","age25.44",779
+"19","Families","age45.64",203
+"20","Families","age65over",13
+"21","Youth","ageunder16",0
+"22","Youth","age16.24",1079
+"23","Youth","age25.44",0
+"24","Youth","age45.64",0
+"25","Youth","age65over",0
+"26","Single Adult","ageunder16",0
+"27","Single Adult","age16.24",0
+"28","Single Adult","age25.44",4094
+"29","Single Adult","age45.64",2391
+"30","Single Adult","age65over",514
+"31","Non-refugees","ageunder16",397
+"32","Non-refugees","age16.24",548
+"33","Non-refugees","age25.44",1814
+"34","Non-refugees","age45.64",1844
+"35","Non-refugees","age65over",492
+"36","Indigenous","ageunder16",9
+"37","Indigenous","age16.24",64
+"38","Indigenous","age25.44",340
+"39","Indigenous","age45.64",234
+"40","Indigenous","age65over",32

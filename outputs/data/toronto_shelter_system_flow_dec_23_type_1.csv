@@ -1,0 +1,49 @@
+"","population_group","type","count"
+"1","All Population","returned_from_housing",53
+"2","All Population","returned_to_shelter",266
+"3","All Population","newly_identified",886
+"4","All Population","moved_to_housing",617
+"5","All Population","became_inactive",447
+"6","All Population","actively_homeless",10607
+"7","Chronic","returned_from_housing",4
+"8","Chronic","returned_to_shelter",64
+"9","Chronic","newly_identified",634
+"10","Chronic","moved_to_housing",504
+"11","Chronic","became_inactive",155
+"12","Chronic","actively_homeless",5774
+"13","Refugees","returned_from_housing",10
+"14","Refugees","returned_to_shelter",24
+"15","Refugees","newly_identified",621
+"16","Refugees","moved_to_housing",399
+"17","Refugees","became_inactive",148
+"18","Refugees","actively_homeless",5512
+"19","Families","returned_from_housing",14
+"20","Families","returned_to_shelter",6
+"21","Families","newly_identified",312
+"22","Families","moved_to_housing",309
+"23","Families","became_inactive",32
+"24","Families","actively_homeless",2522
+"25","Youth","returned_from_housing",8
+"26","Youth","returned_to_shelter",19
+"27","Youth","newly_identified",110
+"28","Youth","moved_to_housing",47
+"29","Youth","became_inactive",56
+"30","Youth","actively_homeless",1079
+"31","Single Adult","returned_from_housing",31
+"32","Single Adult","returned_to_shelter",241
+"33","Single Adult","newly_identified",464
+"34","Single Adult","moved_to_housing",261
+"35","Single Adult","became_inactive",359
+"36","Single Adult","actively_homeless",7006
+"37","Non-refugees","returned_from_housing",43
+"38","Non-refugees","returned_to_shelter",242
+"39","Non-refugees","newly_identified",265
+"40","Non-refugees","moved_to_housing",218
+"41","Non-refugees","became_inactive",299
+"42","Non-refugees","actively_homeless",5095
+"43","Indigenous","returned_from_housing",8
+"44","Indigenous","returned_to_shelter",74
+"45","Indigenous","newly_identified",18
+"46","Indigenous","moved_to_housing",14
+"47","Indigenous","became_inactive",81
+"48","Indigenous","actively_homeless",679
